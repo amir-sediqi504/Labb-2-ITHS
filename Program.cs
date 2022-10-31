@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Kitchen k = new Kitchen();
-
+            k.startList();
             k.val();
         }
     }
@@ -73,6 +73,7 @@
             mikro.Type = "mikro";
             mikro.Brand = "electroluxs";
             mikro.IsFunctioning = true;
+            kitchenAppliances.Add(mikro);
         }
 
         public void Use()
@@ -158,12 +159,29 @@
             kk.Brand = "Siemens";
             kk.IsFunctioning = true;
             kitchenAppliances.Add(kk);
+            string braSkickEllerEj;
+            if (kk.IsFunctioning)
+            {
+                braSkickEllerEj = "bra skick";
+            } else
+            {
+                braSkickEllerEj = "dåligt skick";
+            }
+            
             foreach (var item in kitchenAppliances)
             {
-                Console.WriteLine(num + " " + item.Type);
+                Console.WriteLine(num + " " + item.Type + " av märke " + item.Brand + " och den är i " + braSkickEllerEj);
                 num++;
                 
             }
+        }
+        public void startList()
+        {
+            KitchenAppliance kk = new KitchenAppliance();
+            kk.Type = "våffeljärn";
+            kk.Brand = "Siemens";
+            kk.IsFunctioning = true;
+            kitchenAppliances.Add(kk);
         }
 
     }
