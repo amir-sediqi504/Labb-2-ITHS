@@ -5,18 +5,20 @@
         static void Main(string[] args)
         {
             Kitchen k = new Kitchen();
+
             k.val();
         }
     }
 
     class KitchenAppliance : IKitchenAppliance // typ av objekt i list
     {
-         public string Type { get; set; }
-         public  string Brand { get; set; }
-         public bool IsFunctioning { get; set; }
+        public string Type { get; set; }
+        public string Brand { get; set; }
+        public bool IsFunctioning { get; set; }
 
-       public void Use()
+        public void Use() // dubblett i Kitchen klassen finns
         {
+
             if (IsFunctioning == true)
             {
                 Console.WriteLine(Type + " används");
@@ -28,24 +30,27 @@
         }
     }
 
+
     class Kitchen
     {
+
         List<string> fakeList = new List<string>();
         List<KitchenAppliance> kitchenAppliances = new List<KitchenAppliance>();
-        
+
         bool valOpen = true;
-        
+
 
         public void val()
-            {
+        {
             while (valOpen)
             {
                 Console.WriteLine("1. använd \n 2. lägg till\n 3. Lista alla köksapparater\n 4. ta bort köksapparat\n5. avsluta ");
                 var input = Convert.ToInt32(Console.ReadLine());
                 if (input == 1)
                 {
-                    ShowAll();// lista på alla items
-                    
+                    Use();
+                                      
+
                 } else if (input == 2)
                 {
                     AddItem();
@@ -62,6 +67,31 @@
             }
         }
 
+        public void defaultList()
+        {
+            KitchenAppliance mikro = new KitchenAppliance();
+            mikro.Type = "mikro";
+            mikro.Brand = "electroluxs";
+            mikro.IsFunctioning = true;
+        }
+
+        public void Use()
+        {
+
+            KitchenAppliance k = new KitchenAppliance();
+            Console.WriteLine("vilken köksapparat vill du använda?");
+            ShowAll();
+            int userInp = Convert.ToInt32(Console.ReadLine());
+            if (kitchenAppliances[userInp - 1].IsFunctioning = true)
+            {
+                Console.WriteLine(kitchenAppliances[userInp - 1].Type + " används");
+            }
+            else
+            {
+                Console.WriteLine("trasig");
+            }
+        }
+
         public void taBort()
         {
             Console.WriteLine("lista: ");
@@ -75,6 +105,8 @@
             kitchenAppliances.RemoveAt(applianceToRemive - 1);
             Console.WriteLine("borttagen");
         }
+
+
 
         public void AddItem()
         {
@@ -113,8 +145,8 @@
                     Console.WriteLine(item.Type);
                 }
             }
-           
-           
+
+
         }
         public void ShowAll()
         {
@@ -130,9 +162,10 @@
             {
                 Console.WriteLine(num + " " + item.Type);
                 num++;
-                kk.Use();
+                
             }
         }
-        
+
     }
+    // l   
 }
