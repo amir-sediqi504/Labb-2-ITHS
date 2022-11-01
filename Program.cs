@@ -45,25 +45,35 @@
             while (valOpen)
             {
                 Console.WriteLine("1. använd \n 2. lägg till\n 3. Lista alla köksapparater\n 4. ta bort köksapparat\n5. avsluta ");
-                var input = Convert.ToInt32(Console.ReadLine());
-                if (input == 1)
+                try
                 {
-                    Use();
-                                      
+                    var input = Convert.ToInt32(Console.ReadLine());
+                    if (input == 1)
+                    {
+                        Use();
 
-                } else if (input == 2)
+                    }
+                    else if (input == 2)
+                    {
+                        AddItem();
+                    }
+                    else if (input == 3)
+                    {
+                        ShowAll();
+                    }
+                    else if (input == 4)
+                    {
+                        taBort();
+                    }
+                    else if (input == 5)
+                    {
+                        Environment.Exit(0);
+                    }
+                } catch
                 {
-                    AddItem();
-                } else if (input == 3)
-                {
-                    ShowAll();
-                } else if (input == 4)
-                {
-                    taBort();
-                } else if (input == 5)
-                {
-                    Environment.Exit(0);
+                    Console.WriteLine("fel input, skriv bara in siffror som visas i konsolen");
                 }
+               
             }
         }
 
@@ -78,33 +88,48 @@
 
         public void Use()
         {
-
-            KitchenAppliance k = new KitchenAppliance();
-            Console.WriteLine("vilken köksapparat vill du använda?");
-            ShowAll();
-            int userInp = Convert.ToInt32(Console.ReadLine());
-            if (kitchenAppliances[userInp - 1].IsFunctioning = true)
+            try
             {
-                Console.WriteLine(kitchenAppliances[userInp - 1].Type + " används");
+                Console.WriteLine("vilken köksapparat vill du använda?");
+                ShowAll();
+                int userInp = Convert.ToInt32(Console.ReadLine());
+                if (kitchenAppliances[userInp - 1].IsFunctioning == true)
+                {
+                    Console.WriteLine(kitchenAppliances[userInp - 1].Type + " används");
+                }
+                else
+                {
+                    Console.WriteLine(kitchenAppliances[userInp - 1].Type + " är trasig");
+                }
             }
-            else
+            catch (Exception ex) 
             {
-                Console.WriteLine("trasig");
+                Console.WriteLine("fel input inmatad, använd bara mellan de siffror som visas");
             }
+            
+            
         }
 
         public void taBort()
         {
-            Console.WriteLine("lista: ");
-            int i = 1;
-            foreach (var item in kitchenAppliances)
+            try
             {
-                Console.WriteLine(i + ". " + item.Type);
-                i++;
+                Console.WriteLine("lista: ");
+                int i = 1;
+                foreach (var item in kitchenAppliances)
+                {
+                    Console.WriteLine(i + ". " + item.Type);
+                    i++;
+                }
+                int applianceToRemive = Convert.ToInt32(Console.ReadLine());
+                kitchenAppliances.RemoveAt(applianceToRemive - 1);
+                Console.WriteLine("borttagen");
             }
-            int applianceToRemive = Convert.ToInt32(Console.ReadLine());
-            kitchenAppliances.RemoveAt(applianceToRemive - 1);
-            Console.WriteLine("borttagen");
+            catch
+            {
+                Console.WriteLine("Skriv endast in de siffror som visas i konsolen".ToUpper());
+            }
+            
         }
 
 
@@ -135,7 +160,6 @@
             } else if (isFunc == "n")
             {
                 funkar = false;
-                funkar = true;
                 kit.Type = type;
                 kit.Brand = brand;
                 kit.IsFunctioning = funkar;
